@@ -21,6 +21,7 @@ import os           # environment variables
 import inspect      # call stack inspection
 import random
 import os
+import argparse
 from discord.channel import VoiceChannel       # dumb random number generator
 
 from discord.ext import commands    # Bot class and utils
@@ -204,6 +205,12 @@ async def roll_error(ctx, error):
 
 if __name__ == '__main__':
     # check that token exists in environment
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--token", help="Adaugare token", type=str)
+    args = parser.parse_args()
+    if args.token:
+        bot.run(args.token)
+
     if 'BOT_TOKEN' not in os.environ:
         log_msg('save your token in the BOT_TOKEN env variable!', 'error')
         exit(-1)
